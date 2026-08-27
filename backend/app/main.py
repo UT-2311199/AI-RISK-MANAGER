@@ -87,6 +87,7 @@ origins = [
     "http://localhost:5174",    # Vite alternate port (sometimes used)
     "http://127.0.0.1:3000",   # Same as localhost but explicit IP
     "http://127.0.0.1:5173",
+    "https://ai-risk-manager-tau.vercel.app",
 ]
 # List of frontend origins we allow to make API calls.
 # In PRODUCTION, replace these with your actual frontend domain:
