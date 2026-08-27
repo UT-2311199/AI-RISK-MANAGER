@@ -1,0 +1,37 @@
+# =============================================================================
+# .gitignore — Files to NEVER commit to GitHub
+# =============================================================================
+
+# Environment variables (contains API keys and secrets!)
+.env
+*.env
+
+# Python virtual environment (hundreds of MB of installed packages)
+venv/
+env/
+.venv/
+
+# Python cache files (auto-generated, not needed in version control)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# SQLite database file (development data, not for version control)
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE/editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/

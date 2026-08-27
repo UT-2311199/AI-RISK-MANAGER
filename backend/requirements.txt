@@ -1,0 +1,24 @@
+# AI Risk Manager - Backend Dependencies
+# Install all with: pip install -r requirements.txt
+
+# ── Web Framework ────────────────────────────────────────────────────────────
+fastapi==0.141.1          # FastAPI web framework
+uvicorn==0.52.4           # ASGI server to run FastAPI
+
+# ── Database ─────────────────────────────────────────────────────────────────
+sqlalchemy==2.0.52        # ORM for database operations
+
+# ── AI Integration ───────────────────────────────────────────────────────────
+google-generativeai==0.8.6  # Google Gemini AI SDK
+
+# ── Authentication ───────────────────────────────────────────────────────────
+python-jose[cryptography]==3.5.0  # JWT token creation and verification
+passlib[bcrypt]==1.7.4            # Password hashing with bcrypt
+
+# ── Validation & Config ──────────────────────────────────────────────────────
+pydantic==2.13.4          # Data validation (comes with FastAPI)
+email-validator==2.3.0    # Required for Pydantic's EmailStr type
+python-dotenv==1.2.3      # Load .env file into environment variables
+
+# ── Optional: PostgreSQL support (uncomment when switching from SQLite) ───────
+# psycopg2-binary==2.9.9  # PostgreSQL driver for SQLAlchemy
