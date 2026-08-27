@@ -26,7 +26,10 @@ export function AuthProvider({ children }) {
       setUser(userData);
       return { success: true };
     } catch (err) {
-      return { success: false, error: err.response?.data?.detail || 'Login failed' };
+      const errorMsg = err.response?.data?.detail 
+        || (err.message === 'Network Error' ? 'Cannot connect to backend API server. Check VITE_API_URL environment variable on Vercel.' : err.message)
+        || 'Login failed';
+      return { success: false, error: errorMsg };
     } finally {
       setLoading(false);
     }
@@ -38,7 +41,10 @@ export function AuthProvider({ children }) {
       await authAPI.register({ email, password, full_name });
       return { success: true };
     } catch (err) {
-      return { success: false, error: err.response?.data?.detail || 'Registration failed' };
+      const errorMsg = err.response?.data?.detail 
+        || (err.message === 'Network Error' ? 'Cannot connect to backend API server. Check VITE_API_URL environment variable on Vercel.' : err.message)
+        || 'Registration failed';
+      return { success: false, error: errorMsg };
     } finally {
       setLoading(false);
     }

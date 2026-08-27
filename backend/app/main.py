@@ -81,35 +81,27 @@ app = FastAPI(
 # CORS Configuration
 # =============================================================================
 
+import os
+
+allowed_origins_env = os.getenv("ALLOWED_ORIGINS", "")
+custom_origins = [o.strip() for o in allowed_origins_env.split(",") if o.strip()]
+
 origins = [
-    "http://localhost:3000",    # React (Create React App default port)
-    "http://localhost:5173",    # React + Vite (faster dev server)
-    "http://localhost:5174",    # Vite alternate port (sometimes used)
-    "http://127.0.0.1:3000",   # Same as localhost but explicit IP
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "http://127.0.0.1:3000",
     "http://127.0.0.1:5173",
     "https://ai-risk-manager-tau.vercel.app",
-]
-# List of frontend origins we allow to make API calls.
-# In PRODUCTION, replace these with your actual frontend domain:
-# e.g., "https://ai-risk-manager.vercel.app"
+] + custom_origins
 
 app.add_middleware(
     CORSMiddleware,
-    # Registers the CORS middleware with our app. Middleware runs on EVERY request.
-
-    allow_origins=origins,
-    # Only these origins can make cross-origin requests.
-
+    allow_origins=origins if not allowed_origins_env == "*" else ["*"],
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
-    # Allow cookies and Authorization headers to be sent cross-origin.
-    # Required for JWT Bearer token to be included in requests.
-
     allow_methods=["*"],
-    # Allow ALL HTTP methods: GET, POST, PUT, PATCH, DELETE, OPTIONS.
-    # OPTIONS is important for CORS preflight requests (browser sends OPTIONS first).
-
     allow_headers=["*"],
-    # Allow ALL request headers (including Authorization, Content-Type, etc.)
 )
 
 

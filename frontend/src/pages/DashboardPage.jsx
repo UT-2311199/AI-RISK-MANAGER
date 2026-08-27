@@ -74,11 +74,15 @@ export default function DashboardPage() {
 
   const loadProjects = async () => {
     setLoading(true);
+    setError('');
     try {
       const res = await projectsAPI.list();
       setProjects(res.data);
-    } catch {
-      setError('Failed to load projects.');
+    } catch (err) {
+      const msg = err.response?.data?.detail 
+        || (err.message === 'Network Error' ? 'Cannot connect to backend server. Render free instances sleep after inactivity and take up to 45s to wake up.' : err.message)
+        || 'Failed to load projects.';
+      setError(msg);
     } finally {
       setLoading(false);
     }
@@ -119,6 +123,19 @@ export default function DashboardPage() {
         >
           <span>⚠ Click delete again to confirm removing "<strong>{deleteConfirm.name}</strong>"</span>
           <button className="btn btn-sm btn-ghost" onClick={() => setDeleteConfirm(null)}>Cancel</button>
+        </div>
+      )}
+
+      {/* Error Banner */}
+      {error && (
+        <div
+          className="error-banner mb-lg"
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'rgba(239, 68, 68, 0.15)', border: '1px solid rgba(239, 68, 68, 0.4)', color: '#fca5a5', padding: '12px 16px', borderRadius: '8px' }}
+        >
+          <span>⚠ {error}</span>
+          <button className="btn btn-sm btn-primary" style={{ marginLeft: '16px' }} onClick={loadProjects}>
+            🔄 Retry Connection
+          </button>
         </div>
       )}
 
@@ -168,7 +185,10 @@ export default function DashboardPage() {
       {loading ? (
         <div className="loading-state">
           <Spinner size="lg" />
-          <p>Loading projects from secure store...</p>
+          <p style={{ marginTop: '12px', fontWeight: 600 }}>Loading projects from secure store...</p>
+          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '4px', maxWidth: '400px' }}>
+            Note: Free Render backends go to sleep after inactivity and take 30 to 45 seconds to spin up on first request.
+          </p>
         </div>
       ) : projects.length === 0 ? (
         <div className="card empty-state">
@@ -189,3 +209,4 @@ export default function DashboardPage() {
     </Layout>
   );
 }
+
