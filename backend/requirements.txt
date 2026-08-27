@@ -21,4 +21,4 @@ email-validator==2.3.0    # Required for Pydantic's EmailStr type
 python-dotenv==1.2.3      # Load .env file into environment variables
 
 # ── Optional: PostgreSQL support (uncomment when switching from SQLite) ───────
-# psycopg2-binary==2.9.9  # PostgreSQL driver for SQLAlchemy
+psycopg2-binary==2.9.12
