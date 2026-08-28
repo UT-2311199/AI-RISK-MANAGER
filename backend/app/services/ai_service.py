@@ -452,7 +452,7 @@ async def analyze_project_risks(
     )
 
     # Step 2: Send prompt to Gemini using the new google.genai SDK (with resilient fallback)
-    models_to_try = ["gemini-flash-latest", "gemini-3.6-flash", "gemini-2.5-pro"]
+    models_to_try = ["gemini-2.5-flash", "gemini-flash-latest", "gemini-2.5-flash-lite", "gemini-flash-lite-latest"]
     last_error = None
     response_text = None
 

@@ -87,6 +87,9 @@ class Token(BaseModel):
     # Always "bearer" for JWT authentication.
     # "bearer" means: "whoever bears (has) this token is authenticated."
 
+    user: Optional[UserResponse] = None
+    # User info (id, email, full_name, created_at)
+
 
 class UserLogin(BaseModel):
     """

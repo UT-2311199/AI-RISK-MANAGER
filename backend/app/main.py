@@ -98,7 +98,8 @@ origins = [
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins if not allowed_origins_env == "*" else ["*"],
-    allow_origin_regex=r"https://.*\.vercel\.app",
+    # Allow all Vercel preview URLs (*.vercel.app) AND all Render service URLs (*.onrender.com)
+    allow_origin_regex=r"https://(.*\.vercel\.app|.*\.onrender\.com)",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

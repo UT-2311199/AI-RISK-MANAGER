@@ -203,8 +203,9 @@ def login(
 
     return Token(
         access_token=access_token,
-        token_type="bearer"
+        token_type="bearer",
+        user=user
         # "bearer" is the OAuth2 token type for JWT tokens.
         # The client sends it as: Authorization: Bearer <access_token>
     )
-    # This returns: {"access_token": "eyJhbGci...", "token_type": "bearer"}
+    # This returns: {"access_token": "eyJhbGci...", "token_type": "bearer", "user": {...}}

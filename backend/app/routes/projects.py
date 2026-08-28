@@ -38,9 +38,15 @@ router = APIRouter(
 # =============================================================================
 
 @router.post(
-    "/",
+    "",
     response_model=ProjectResponse,
     status_code=status.HTTP_201_CREATED
+)
+@router.post(
+    "/",
+    response_model=ProjectResponse,
+    status_code=status.HTTP_201_CREATED,
+    include_in_schema=False
 )
 def create_project(
     project_data: ProjectCreate,
@@ -92,8 +98,13 @@ def create_project(
 # =============================================================================
 
 @router.get(
-    "/",
+    "",
     response_model=List[ProjectSummary]
+)
+@router.get(
+    "/",
+    response_model=List[ProjectSummary],
+    include_in_schema=False
     # response_model=List[ProjectSummary] → returns an ARRAY of ProjectSummary objects.
     # We use ProjectSummary (not full ProjectResponse) to keep the list lightweight.
     # No need to send the full 'context' text in every list item.
